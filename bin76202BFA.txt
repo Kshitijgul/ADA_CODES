@@ -1,0 +1,110 @@
+{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[]},"kernels
+pec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"},"accelerator":"T
+PU"},"cells":[{"cell_type":"code","execution_c
+ount":1,"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"NWRkRTxRLZaK","outputId":
+"a8403d37-a34f-4de9-ee57-7505e0982e7d","executionInfo":{"status":"ok","timestamp":1700419826024,"
+user_tz":-330,"elapsed":128896,"user":{"displayName":"TYAIMLA29 KOUSTUBH","userId":"17858499035432
+319099"}}},"outputs":[{"output_type":"stream","name":"stdout","text"
+:["Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz\n","170498071/170
+498071 [==============================] - 2s 0us/step\n","1563/1563 [============================
+==] - 101s 63ms/step - loss: 1.7140 - accuracy: 0.3667 - val_loss: 1.
+3628 - val_accuracy: 0.5033\n","313/313 - 4s - loss: 1.3628 - accuracy: 0.5033 - 4s/epoch - 13ms
+/step\n","Test accuracy: 0.5033000111579895\n"]}],"source":["import tensorflow as tf\n","from ten
+sorflow import keras\n","from tensorflow.keras.datasets import cifar10\n","from tensorflow.keras.m
+odels import Sequential\n","from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dens
+e, Dropout\n","\n","# Load and preprocess the CIFAR-10 dataset\n","(x_train, y_train), (x_test, y_t
+est) = cifar10.load_data()\n","x_train, x_test = x_train / 255.0, x_test / 255.0  # Normalize pixel 
+values to [0, 1]\n","\n","# Define the CNN model\n","model = Sequential([\n","    Conv2D(32, (3, 3), 
+activation='relu', input_shape=(32, 32, 3)),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), 
+activation='relu'),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), acti
+vation='relu'),\n","    Flatten(),\n","    Dense(64, activation='relu'),\n","    Dropout(0.5),\n","    
+Dense(10)  # 10 output classes for CIFAR-10\n","])\n","\n","# Compile the model\n","model.compile(opt
+imizer='adam',\n"," 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.*;
+
+/*
+*   edges: vector of vectors which represents the graph
+*   S: source vertex to start traversing graph with
+*   V: number of vertices
+*/
+class Solution {
+    static int[] bellman_ford(int V,
+            ArrayList<ArrayList<Integer>> edges, int S) {
+        int[] dist = new int[V];
+        for (int i = 0; i < V; i++)
+            dist[i] = (int) (1e8);
+        dist[S] = 0;
+        // V x E
+        for (int i = 0; i < V - 1; i++) {
+            for (ArrayList<Integer> it : edges) {
+                int u = it.get(0);
+                int v = it.get(1);
+                int wt = it.get(2);
+                if (dist[u] != 1e8 && dist[u] + wt < dist[v]) {
+                    dist[v] = dist[u] + wt;
+                }
+            }
+        }
+        // Nth relaxation to check negative cycle
+        for (ArrayList<Integer> it : edges) {
+            int u = it.get(0);
+            int v = it.get(1);
+            int wt = it.get(2);
+            if (dist[u] != 1e8 && dist[u] + wt < dist[v]) {
+                int temp[] = new int[1];
+                temp[0] = -1;
+                return temp;
+            }
+        }
+        return dist;
+    }
+}
+
+public class Bellman_Ford {
+    public static void main(String[] args) {
+        int V = 6;
+        int S = 0;
+        ArrayList<ArrayList<Integer>> edges = new ArrayList<>() {
+            {
+                add(new ArrayList<Integer>(Arrays.asList(3, 2, 6)));
+                add(new ArrayList<Integer>(Arrays.asList(5, 3, 1)));
+                add(new ArrayList<Integer>(Arrays.asList(0, 1, 5)));
+                add(new ArrayList<Integer>(Arrays.asList(1, 5, -3)));
+                add(new ArrayList<Integer>(Arrays.asList(1, 2, -2)));
+                add(new ArrayList<Integer>(Arrays.asList(3, 4, -2)));
+                add(new ArrayList<Integer>(Arrays.asList(2, 4, 3)));
+            }
+        };
+
+        int[] dist = Solution.bellman_ford(V, edges, S);
+        for (int i = 0; i < V; i++) {
+            System.out.print(dist[i] + " ");
+        }
+        System.out.println("");
+    }
+}

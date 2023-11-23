@@ -1,0 +1,105 @@
+{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[]},"kernels
+pec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"},"accelerator":"T
+PU"},"cells":[{"cell_type":"code","execution_c
+ount":1,"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"NWRkRTxRLZaK","outputId":
+"a8403d37-a34f-4de9-ee57-7505e0982e7d","executionInfo":{"status":"ok","timestamp":1700419826024,"
+user_tz":-330,"elapsed":128896,"user":{"displayName":"TYAIMLA29 KOUSTUBH","userId":"17858499035432
+319099"}}},"outputs":[{"output_type":"stream","name":"stdout","text"
+:["Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz\n","170498071/170
+498071 [==============================] - 2s 0us/step\n","1563/1563 [============================
+==] - 101s 63ms/step - loss: 1.7140 - accuracy: 0.3667 - val_loss: 1.
+3628 - val_accuracy: 0.5033\n","313/313 - 4s - loss: 1.3628 - accuracy: 0.5033 - 4s/epoch - 13ms
+/step\n","Test accuracy: 0.5033000111579895\n"]}],"source":["import tensorflow as tf\n","from ten
+sorflow import keras\n","from tensorflow.keras.datasets import cifar10\n","from tensorflow.keras.m
+odels import Sequential\n","from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dens
+e, Dropout\n","\n","# Load and preprocess the CIFAR-10 dataset\n","(x_train, y_train), (x_test, y_t
+est) = cifar10.load_data()\n","x_train, x_test = x_train / 255.0, x_test / 255.0  # Normalize pixel 
+values to [0, 1]\n","\n","# Define the CNN model\n","model = Sequential([\n","    Conv2D(32, (3, 3), 
+activation='relu', input_shape=(32, 32, 3)),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), 
+activation='relu'),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), acti
+vation='relu'),\n","    Flatten(),\n","    Dense(64, activation='relu'),\n","    Dropout(0.5),\n","    
+Dense(10)  # 10 output classes for CIFAR-10\n","])\n","\n","# Compile the model\n","model.compile(opt
+imizer='adam',\n","  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.*;
+public class Job_Sequencing {
+    static class Job{
+        int deadline;
+        int profit;
+        int id;
+        public Job(int d, int p, int i) {
+            id = i;
+            profit = p;
+            deadline = d;
+        }
+        
+    }
+    public static void main(String[] args){
+        int jobsinfo [][]={{4,20},{1,10},{1,40},{1,30}};
+        ArrayList<Job> jobs = new ArrayList<Job>();
+        for (int i = 0; i < jobsinfo.length; i++) {
+            jobs.add(new Job(jobsinfo[i][0], jobsinfo[i][1], i + 1));
+        }
+        
+        Collections.sort(jobs, (obj1,obj2) -> obj2.profit-obj1.profit); // Ascending order by Profit 
+        // Desceding order
+        ArrayList<Integer> seq = new ArrayList<>();
+        int time=0;
+        for(int i=0;i<jobs.size();i++){
+            Job curr = jobs.get(i);
+            if(curr.deadline > time){
+                seq.add(curr.id);
+                time++;
+
+            }
+        }
+        System.out.println("Max jobs: " + seq.size());
+        for(int i=0;i<seq.size();i++){
+            System.out.println(seq.get(i)+ " ");
+        }
+System.out.println();
+
+
+    }
+}

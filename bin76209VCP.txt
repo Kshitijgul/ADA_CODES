@@ -1,0 +1,100 @@
+{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[]},"kernels
+pec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"},"accelerator":"T
+PU"},"cells":[{"cell_type":"code","execution_c
+ount":1,"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"NWRkRTxRLZaK","outputId":
+"a8403d37-a34f-4de9-ee57-7505e0982e7d","executionInfo":{"status":"ok","timestamp":1700419826024,"
+user_tz":-330,"elapsed":128896,"user":{"displayName":"TYAIMLA29 KOUSTUBH","userId":"17858499035432
+319099"}}},"outputs":[{"output_type":"stream","name":"stdout","text"
+:["Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz\n","170498071/170
+498071 [==============================] - 2s 0us/step\n","1563/1563 [============================
+==] - 101s 63ms/step - loss: 1.7140 - accuracy: 0.3667 - val_loss: 1.
+3628 - val_accuracy: 0.5033\n","313/313 - 4s - loss: 1.3628 - accuracy: 0.5033 - 4s/epoch - 13ms
+/step\n","Test accuracy: 0.5033000111579895\n"]}],"source":["import tensorflow as tf\n","from ten
+sorflow import keras\n","from tensorflow.keras.datasets import cifar10\n","from tensorflow.keras.m
+odels import Sequential\n","from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dens
+e, Dropout\n","\n","# Load and preprocess the CIFAR-10 dataset\n","(x_train, y_train), (x_test, y_t
+est) = cifar10.load_data()\n","x_train, x_test = x_train / 255.0, x_test / 255.0  # Normalize pixel 
+values to [0, 1]\n","\n","# Define the CNN model\n","model = Sequential([\n","    Conv2D(32, (3, 3), 
+activation='relu', input_shape=(32, 32, 3)),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), 
+activation='relu'),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), acti
+vation='relu'),\n","    Flatten(),\n","    Dense(64, activation='relu'),\n","    Dropout(0.5),\n","    
+Dense(10)  # 10 output classes for CIFAR-10\n","])\n","\n","# Compile the model\n","model.compile(opt
+imizer='adam',\n","  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from collections import defaultdict
+
+class Graph:
+
+	def __init__(self, vertices):
+		self.V = vertices
+		self.graph = defaultdict(list)
+
+	# Function to add an edge to graph
+	def addEdge(self, u, v):
+		self.graph[u].append(v)
+
+	# The function to print vertex cover
+	def printVertexCover(self):
+
+		# Initialize all vertices as not visited.
+		visited = [False] * (self.V)
+
+		# Consider all edges one by one
+		for u in range(self.V):
+			if not visited[u]:
+				for v in self.graph[u]:
+					if not visited[v]:
+
+						# Add the vertices (u, v) to the result set. We make the vertex
+						# u and v visited so that all edges from/to them would  be ignored
+						visited[v] = True
+						visited[u] = True
+						break
+
+		# Print the vertex cover
+		for j in range(self.V):
+			if visited[j]:
+				print(j, end = ' ')
+
+# Driver code
+g = Graph(7)
+g.addEdge(1, 2)
+g.addEdge(1, 4)
+g.addEdge(2, 3)
+g.addEdge(2, 5)
+g.addEdge(3, 6)
+g.addEdge(5, 6)
+g.addEdge(3, 7)
+
+print('The vertex cover of the given graph is : ')
+g.printVertexCover()

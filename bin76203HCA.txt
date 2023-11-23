@@ -1,0 +1,99 @@
+{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[]},"kernels
+pec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"},"accelerator":"T
+PU"},"cells":[{"cell_type":"code","execution_c
+ount":1,"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"NWRkRTxRLZaK","outputId":
+"a8403d37-a34f-4de9-ee57-7505e0982e7d","executionInfo":{"status":"ok","timestamp":1700419826024,"
+user_tz":-330,"elapsed":128896,"user":{"displayName":"TYAIMLA29 KOUSTUBH","userId":"17858499035432
+319099"}}},"outputs":[{"output_type":"stream","name":"stdout","text"
+:["Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz\n","170498071/170
+498071 [==============================] - 2s 0us/step\n","1563/1563 [============================
+==] - 101s 63ms/step - loss: 1.7140 - accuracy: 0.3667 - val_loss: 1.
+3628 - val_accuracy: 0.5033\n","313/313 - 4s - loss: 1.3628 - accuracy: 0.5033 - 4s/epoch - 13ms
+/step\n","Test accuracy: 0.5033000111579895\n"]}],"source":["import tensorflow as tf\n","from ten
+sorflow import keras\n","from tensorflow.keras.datasets import cifar10\n","from tensorflow.keras.m
+odels import Sequential\n","from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dens
+e, Dropout\n","\n","# Load and preprocess the CIFAR-10 dataset\n","(x_train, y_train), (x_test, y_t
+est) = cifar10.load_data()\n","x_train, x_test = x_train / 255.0, x_test / 255.0  # Normalize pixel 
+values to [0, 1]\n","\n","# Define the CNN model\n","model = Sequential([\n","    Conv2D(32, (3, 3), 
+activation='relu', input_shape=(32, 32, 3)),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), 
+activation='relu'),\n","    MaxPooling2D((2, 2)),\n","    Conv2D(64, (3, 3), acti
+vation='relu'),\n","    Flatten(),\n","    Dense(64, activation='relu'),\n","    Dropout(0.5),\n","    
+Dense(10)  # 10 output classes for CIFAR-10\n","])\n","\n","# Compile the model\n","model.compile(opt
+imizer='adam',\n","  
+
+
+
+
+import java.util.PriorityQueue;
+import java.util.HashMap;
+
+class HuffmanNode implements Comparable<HuffmanNode> {
+    char data;
+    int frequency;
+    HuffmanNode left, right;
+
+    public HuffmanNode(char data, int frequency) {
+        this.data = data;
+        this.frequency = frequency;
+    }
+
+    @Override
+    public int compareTo(HuffmanNode other) {
+        return this.frequency - other.frequency;
+    }
+}
+
+public class huffman_code{
+    public static void main(String[] args) {
+        // Given frequency table
+        HashMap<Character, Integer> frequencyMap = new HashMap<>();
+        frequencyMap.put('a', 5);
+        frequencyMap.put('b', 9);
+        frequencyMap.put('c', 12);
+        frequencyMap.put('d', 13);
+        frequencyMap.put('e', 16);
+        frequencyMap.put('f', 45);
+
+        PriorityQueue<HuffmanNode> priorityQueue = new PriorityQueue<>();
+
+        // Create a leaf node for each character and add it to the priority queue
+        for (char c : frequencyMap.keySet()) {
+            priorityQueue.add(new HuffmanNode(c, frequencyMap.get(c)));
+        }
+
+        // Build Huffman tree
+        while (priorityQueue.size() > 1) {
+            HuffmanNode left = priorityQueue.poll();
+            HuffmanNode right = priorityQueue.poll();
+
+            HuffmanNode newNode = new HuffmanNode('\0', left.frequency + right.frequency);
+            newNode.left = left;
+            newNode.right = right;
+
+            priorityQueue.add(newNode);
+        }
+
+        HuffmanNode root = priorityQueue.poll();
+        HashMap<Character, String> huffmanCodes = new HashMap<>();
+        buildHuffmanCodes(root, "", huffmanCodes);
+
+        System.out.println("Huffman Codes:");
+        for (char c : huffmanCodes.keySet()) {
+            System.out.println(c + ": " + huffmanCodes.get(c));
+        }
+    }
+
+    public static void buildHuffmanCodes(HuffmanNode node, String code, HashMap<Character, String> huffmanCodes) {
+        if (node == null) {
+            return;
+        }
+
+        if (node.data != '\0') {
+            huffmanCodes.put(node.data, code);
+        }
+
+        buildHuffmanCodes(node.left, code + "0", huffmanCodes);
+        buildHuffmanCodes(node.right, code + "1", huffmanCodes);
+    }
+}
+
